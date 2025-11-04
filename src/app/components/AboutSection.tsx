@@ -91,10 +91,23 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
                   animate={{ opacity: 1, y: 0 }}
                   exit={shouldReduceMotion ? { opacity: 0, y: 0 } : { opacity: 0, y: -10 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="h-full rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur"
+                  className="flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0b1119]/80 shadow-2xl backdrop-blur"
                 >
-                  <h3 className="text-2xl font-semibold text-white">{activeTopic.title}</h3>
-                  <p className="mt-4 text-base leading-relaxed text-white/80">{activeTopic.description}</p>
+                  <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-red-400/80" aria-hidden="true" />
+                      <span className="h-3 w-3 rounded-full bg-yellow-300/80" aria-hidden="true" />
+                      <span className="h-3 w-3 rounded-full bg-emerald-400/80" aria-hidden="true" />
+                    </div>
+                    <p className="pointer-events-none select-none text-xs font-medium uppercase tracking-[0.2em] text-white/50">
+                      Sobre mim
+                    </p>
+                    <span aria-hidden="true" className="w-6" />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-4 px-6 py-6 text-white/80">
+                    <h3 className="text-2xl font-semibold text-white">{activeTopic.title}</h3>
+                    <p className="text-base leading-relaxed">{activeTopic.description}</p>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
