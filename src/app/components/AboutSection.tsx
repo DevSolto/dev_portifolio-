@@ -44,7 +44,7 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
   return (
     <section
       id="sobre"
-      className="px-6 py-20 text-white"
+      className="bg-zinc-950 px-6 py-20 text-white dark:bg-black"
       aria-labelledby="about-section-title"
     >
       <div className="mx-auto max-w-6xl">
@@ -56,8 +56,7 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
             Explorando histórias, tecnologias e experiências.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/70">
-            Clique em um tópico para conhecer mais sobre minha trajetória, stack principal e como aplico tudo isso em projetos
-            reais.
+            Clique em um tópico para conhecer mais sobre minha trajetória, stack principal e como aplico tudo isso em projetos reais.
           </p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2">
