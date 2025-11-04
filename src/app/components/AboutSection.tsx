@@ -91,7 +91,7 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
                   onClick={() => setActiveTopic(topic.id)}
                   onMouseEnter={() => setActiveTopic(topic.id)}
                   onFocus={() => setActiveTopic(topic.id)}
-                  className={`group w-full rounded-2xl border border-white/10 px-6 py-6 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B5CF6] ${
+                  className={`group w-full rounded-2xl border border-white/10 px-6 py-6 text-left transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#8B5CF6] ${
                     isActive
                       ? "bg-white/10 ring-1 ring-inset ring-[#8B5CF6]/60"
                       : "bg-white/5 hover:border-[#06B6D4]/40 hover:bg-white/10"

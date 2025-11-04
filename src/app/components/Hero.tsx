@@ -55,7 +55,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative flex min-h-[88vh] w-full items-center justify-center overflow-hidden bg-[#0B0F14] px-6 py-24 text-white"
+      className="relative flex min-h-[88vh] w-full items-center justify-center bg-[#0B0F14] px-6 py-24 text-white"
       id="inicio"
       role="region"
       aria-label="Seção principal com apresentação e terminal interativo"
