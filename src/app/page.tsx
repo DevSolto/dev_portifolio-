@@ -1,11 +1,11 @@
 import {
-  AboutSection,
   ContactSection,
   HeroSection,
   ProjectsSection,
   ServicesSection,
   TestimonialsSection,
 } from "@/components/sections";
+import AboutSection from "./components/AboutSection";
 
 export default function Home() {
   return (

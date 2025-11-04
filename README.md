@@ -1,37 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Visão geral
 
-## Getting Started
+DevSouto Portfolio é um projeto construído com **Next.js (App Router)**, **TypeScript**, **Tailwind CSS** e animações com **Framer Motion**. O objetivo é apresentar informações profissionais em uma landing page responsiva e acessível.
 
-First, run the development server:
+## Executando localmente
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação ficará disponível em `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Seção "Sobre mim"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A seção "Sobre mim" fica em `src/app/components/AboutSection.tsx` e é importada na página principal (`src/app/page.tsx`). Ela possui dois elementos principais:
 
-## Learn More
+- Lista de tópicos clicáveis à esquerda (mobile-first) que controla o estado interno do componente.
+- Card descritivo animado à direita que exibe os detalhes do tópico selecionado.
 
-To learn more about Next.js, take a look at the following resources:
+### Como adicionar novos tópicos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Abra `src/app/components/AboutSection.tsx`.
+2. Edite o array `DEFAULT_TOPICS` ou envie uma propriedade `topics` ao componente com os novos itens. Cada tópico deve seguir a interface `{ id: string; title: string; description: string; }`.
+3. Novos tópicos aparecerão automaticamente na lista e no card dinâmico.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Ajustando animações
 
-## Deploy on Vercel
+- As animações utilizam `framer-motion` com `AnimatePresence` e `motion.div`.
+- Para alterar duração ou easing, atualize o objeto `transition` passado ao `motion.div` do card.
+- O componente respeita preferências de movimento reduzido via `useReducedMotion`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Integração na página principal
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# dev_portifolio-
+O componente é utilizado diretamente na página inicial:
+
+```tsx
+import AboutSection from "./components/AboutSection";
+
+export default function Home() {
+  return (
+    <main>
+      <AboutSection />
+    </main>
+  );
+}
+```
+
+Outras seções continuam disponíveis através de `src/components/sections`.
