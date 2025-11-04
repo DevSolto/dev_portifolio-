@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+
+import { useAboutStore } from "../store/aboutStore";
 
 type Topic = {
   id: string;
@@ -15,36 +17,51 @@ type AboutSectionProps = {
 
 const DEFAULT_TOPICS: Topic[] = [
   {
-    id: "intro",
-    title: "Quem sou",
+    id: "mindset",
+    title: "Arquitetura Mental",
     description:
-      "Sou um desenvolvedor frontend apaixonado por criar experiências digitais que combinam performance, acessibilidade e design minimalista. Meu foco está em entender o problema, colaborar com o time e entregar produtos que façam diferença.",
+      "Acredito em interfaces que respiram tecnologia — onde componentes são sistemas autônomos conectados por fluxos previsíveis de estado e dados. Busco equilíbrio entre lógica, estética e performance.",
   },
   {
     id: "stack",
-    title: "Tecnologias",
+    title: "Stack de Escolha",
     description:
-      "Trabalho diariamente com Next.js, React, Tailwind CSS e Node.js, além de ferramentas de automação e qualidade como TypeScript, ESLint e testes automatizados. Gosto de explorar novas tecnologias e incorporar boas práticas no fluxo de desenvolvimento.",
+      "React + TypeScript para previsibilidade. Zustand para estados simples e diretos. TanStack Query para sincronização de dados reativa. Vite para builds rápidos. shadcn/ui para consistência visual e acessibilidade.",
   },
   {
-    id: "xp",
-    title: "Experiência",
+    id: "experience",
+    title: "Experiência e Propósito",
     description:
-      "Atuei em projetos reais focados em produtos escaláveis, performance e UX, colaborando com times multidisciplinares. Tenho experiência em transformar interfaces em soluções robustas, sempre atento aos detalhes e à satisfação do usuário final.",
+      "Desenvolvo interfaces que unem design e engenharia. De dashboards a landing pages, foco em UX, acessibilidade e performance. Cada componente é uma peça de um sistema fluido e escalável.",
   },
 ];
 
-export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionProps) {
-  const validTopics = useMemo(() => (topics.length > 0 ? topics : DEFAULT_TOPICS), [topics]);
-  const [activeId, setActiveId] = useState<string>(validTopics[0]?.id ?? "intro");
-  const shouldReduceMotion = useReducedMotion();
+const cardTransitions = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
+} as const;
 
-  const activeTopic = validTopics.find((topic) => topic.id === activeId) ?? validTopics[0];
+export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const activeTopic = useAboutStore((state) => state.activeTopic);
+  const setActiveTopic = useAboutStore((state) => state.setActiveTopic);
+
+  const normalizedTopics = useMemo(() => (topics.length ? topics : DEFAULT_TOPICS), [topics]);
+  const currentTopic = normalizedTopics.find((topic) => topic.id === activeTopic);
+  const fallbackTopic = normalizedTopics[0];
+  const topicToDisplay = currentTopic ?? fallbackTopic;
+
+  useEffect(() => {
+    if (!currentTopic && fallbackTopic) {
+      setActiveTopic(fallbackTopic.id);
+    }
+  }, [currentTopic, fallbackTopic, setActiveTopic]);
 
   return (
     <section
       id="sobre"
-      className=" px-6 py-20 text-white"
+      className="relative px-6 py-20 text-white"
       aria-labelledby="about-section-title"
     >
       <div className="mx-auto max-w-6xl">
@@ -53,76 +70,105 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
             Sobre mim
           </span>
           <h2 id="about-section-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Explorando histórias, tecnologias e experiências.
+            Engenharia de interfaces com propósito e fluidez.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/70">
-            Passe o mouse por um tópico para conhecer mais sobre minha trajetória, stack principal e como aplico tudo isso em projetos reais.
+            Escolha um tópico para navegar pelo meu processo: mentalidade arquitetural, stack favorita e como transformo ideias em experiências digitais escaláveis.
           </p>
         </div>
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div className="relative">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -inset-4 rounded-3xl bg-emerald-400/10 blur-3xl"
-            />
-            <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#050b12]/80 shadow-2xl backdrop-blur">
-              <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
-                <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-400/80" aria-hidden="true" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-300/80" aria-hidden="true" />
-                  <span className="h-3 w-3 rounded-full bg-emerald-400/80" aria-hidden="true" />
-                </div>
-                <p className="pointer-events-none select-none text-xs font-medium uppercase tracking-[0.2em] text-white/50">
-                  Sobre mim
-                </p>
-                <span aria-hidden="true" className="w-6" />
-              </div>
-              <div className="flex flex-1 flex-col gap-4 px-6 py-6">
-                <div className="rounded-2xl  p-5 font-mono text-sm text-emerald-100">
-                  <p className="text-emerald-400">~/sobre/{activeTopic?.id ?? "intro"}</p>
-                  <AnimatePresence mode="wait">
-                    {activeTopic && (
-                      <motion.div
-                        key={activeTopic.id}
-                        initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={shouldReduceMotion ? { opacity: 0, y: 0 } : { opacity: 0, y: -6 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="mt-3 space-y-3"
-                      >
-                        <h3 className="text-base font-semibold text-white">$ {activeTopic.title}</h3>
-                        <p className="whitespace-pre-line text-[15px] leading-relaxed text-white/80">
-                          {activeTopic.description}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4 lg:pl-4">
-            {validTopics.map((topic) => {
-              const isActive = topic.id === activeTopic?.id;
+
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <div className="space-y-4">
+            {normalizedTopics.map((topic) => {
+              const isActive = topic.id === topicToDisplay?.id;
 
               return (
                 <button
                   key={topic.id}
                   type="button"
-                  role="button"
                   aria-pressed={isActive}
-                  onMouseEnter={() => setActiveId(topic.id)}
-                  onFocus={() => setActiveId(topic.id)}
-                  className={`w-full rounded-2xl px-6 py-5 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isActive
-                    ? "scale-[1.02] border border-emerald-400/40 bg-[#0b1119]/80 shadow-lg"
-                    : "border border-white/5 bg-[#050b12]/60"
-                    } ${shouldReduceMotion ? "" : "transform transition-transform hover:scale-[1.02]"}`}
+                  aria-controls="about-topic-panel"
+                  onClick={() => setActiveTopic(topic.id)}
+                  onMouseEnter={() => setActiveTopic(topic.id)}
+                  onFocus={() => setActiveTopic(topic.id)}
+                  className={`group w-full rounded-2xl border border-white/10 px-6 py-6 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B5CF6] ${
+                    isActive
+                      ? "bg-white/10 ring-1 ring-inset ring-[#8B5CF6]/60"
+                      : "bg-white/5 hover:border-[#06B6D4]/40 hover:bg-white/10"
+                  }`}
                 >
-                  <span className="text-lg font-semibold text-white">{topic.title}</span>
-                  <p className="mt-2 text-sm text-white/70">{topic.description}</p>
+                  <span className="flex items-start justify-between gap-4">
+                    <span className="text-lg font-semibold text-white">{topic.title}</span>
+                    <span
+                      aria-hidden
+                      className={`mt-1 h-2 w-2 rounded-full transition ${
+                        isActive ? "bg-[#8B5CF6] shadow-[0_0_12px_#8B5CF6]" : "bg-white/20"
+                      }`}
+                    />
+                  </span>
+                  <p className="mt-3 text-sm leading-relaxed text-white/70">{topic.description}</p>
                 </button>
               );
             })}
+          </div>
+
+          <div className="relative">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 rounded-[30px] bg-gradient-to-br from-[#8B5CF6]/30 via-transparent to-[#06B6D4]/30 blur-3xl"
+            />
+            <div className="relative h-full rounded-[30px] border border-white/10 bg-white/5 p-8 shadow-[0_20px_60px_-25px_rgba(11,15,20,0.9)] backdrop-blur-md sm:p-10">
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-white/50">Painel ativo</p>
+                  <p className="mt-1 font-mono text-sm text-[#06B6D4]/90">~/sobre/{topicToDisplay?.id}</p>
+                </div>
+                <motion.span
+                  aria-hidden
+                  className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 shadow-sm"
+                  initial={false}
+                  animate={{
+                    opacity: shouldReduceMotion ? 1 : [0.6, 1, 0.6],
+                    scale: shouldReduceMotion ? 1 : [1, 1.04, 1],
+                  }}
+                  transition={{ repeat: shouldReduceMotion ? 0 : Infinity, duration: 3, ease: "easeInOut" }}
+                >
+                  React • Zustand • Framer Motion
+                </motion.span>
+              </div>
+
+              <AnimatePresence mode="wait" initial={false}>
+                {topicToDisplay && (
+                  <motion.div
+                    key={topicToDisplay.id}
+                    initial={shouldReduceMotion ? { opacity: 1, y: 0 } : cardTransitions.initial}
+                    animate={shouldReduceMotion ? { opacity: 1, y: 0 } : cardTransitions.animate}
+                    exit={shouldReduceMotion ? { opacity: 0, y: 0 } : cardTransitions.exit}
+                    transition={{
+                      duration: shouldReduceMotion ? 0 : 0.3,
+                      ease: "easeOut",
+                      delay: shouldReduceMotion ? 0 : 0.05,
+                    }}
+                    className="space-y-4"
+                    id="about-topic-panel"
+                    role="region"
+                    aria-live="polite"
+                  >
+                    <motion.h3
+                      layout
+                      className="text-2xl font-semibold text-white"
+                      animate={shouldReduceMotion ? { opacity: 1 } : { opacity: [0.85, 1], textShadow: "0 0 18px rgba(139, 92, 246, 0.45)" }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: "easeInOut" }}
+                    >
+                      {topicToDisplay.title}
+                    </motion.h3>
+                    <p className="max-w-xl text-base leading-relaxed text-white/75">
+                      {topicToDisplay.description}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>

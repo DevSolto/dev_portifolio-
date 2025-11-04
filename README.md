@@ -13,37 +13,29 @@ A aplicação ficará disponível em `http://localhost:3000`.
 
 ## Seção "Sobre mim"
 
-A seção "Sobre mim" fica em `src/app/components/AboutSection.tsx` e é importada na página principal (`src/app/page.tsx`). Ela possui dois elementos principais:
+A seção "Sobre mim" vive em `src/app/components/AboutSection.tsx` e agora é alimentada por um store global baseado em Zustand (`src/app/store/aboutStore.ts`). A hierarquia foi pensada para reforçar o storytelling técnico:
 
-- Lista de tópicos clicáveis à esquerda (mobile-first) que controla o estado interno do componente.
-- Card descritivo animado à direita que exibe os detalhes do tópico selecionado.
+- **Painel esquerdo**: lista de tópicos focada em acessibilidade (botões com `aria-pressed` e foco visível).
+- **Painel direito**: card dinâmico com transições suaves (`AnimatePresence`) e badge flutuante destacando a stack React moderna.
 
 ### Como adicionar novos tópicos
 
 1. Abra `src/app/components/AboutSection.tsx`.
-2. Edite o array `DEFAULT_TOPICS` ou envie uma propriedade `topics` ao componente com os novos itens. Cada tópico deve seguir a interface `{ id: string; title: string; description: string; }`.
-3. Novos tópicos aparecerão automaticamente na lista e no card dinâmico.
+2. Atualize o array `DEFAULT_TOPICS` (ou injete uma prop `topics`) adicionando itens com `{ id: string; title: string; description: string; }`.
+3. Opcionalmente, ajuste o estado inicial no store (`src/app/store/aboutStore.ts`) caso queira que a seção comece com um tópico específico.
 
-### Ajustando animações
+### Estado global com Zustand
 
-- As animações utilizam `framer-motion` com `AnimatePresence` e `motion.div`.
-- Para alterar duração ou easing, atualize o objeto `transition` passado ao `motion.div` do card.
-- O componente respeita preferências de movimento reduzido via `useReducedMotion`.
+- O hook `useAboutStore` exportado de `src/app/store/aboutStore.ts` centraliza o tópico ativo.
+- Para reutilizar o estado em outros componentes, basta importar `useAboutStore` e consumir `activeTopic` ou `setActiveTopic` via selectors.
+- O projeto expõe uma implementação leve de `create` em `src/lib/zustand.ts`, mantendo a mesma API do pacote oficial e evitando dependências extras no ambiente atual.
+
+### Ajustando animações e tema
+
+- As transições principais estão no objeto `cardTransitions` e nos props `initial/animate/exit` dos elementos `motion`.
+- Para alterar timing, easing ou delays, edite o `transition` passado ao card ou ao título.
+- As cores de destaque utilizam `#8B5CF6` (primária) e `#06B6D4` (secundária); adapte no Tailwind se quiser personalizar o tema.
 
 ## Integração na página principal
 
-O componente é utilizado diretamente na página inicial:
-
-```tsx
-import AboutSection from "./components/AboutSection";
-
-export default function Home() {
-  return (
-    <main>
-      <AboutSection />
-    </main>
-  );
-}
-```
-
-Outras seções continuam disponíveis através de `src/components/sections`.
+O componente continua importado diretamente em `src/app/page.tsx`. Não é necessário passar props — os tópicos padrão e o estado global já garantem o comportamento interativo out of the box.
