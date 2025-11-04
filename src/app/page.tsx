@@ -1,13 +1,21 @@
-
 import AboutSection from "./components/AboutSection";
-import TerminalHero from "./components/TerminalHero";
+import {
+  ContactSection,
+  HeroSection,
+  ProjectsSection,
+  ServicesSection,
+  TestimonialsSection,
+} from "@/components/sections";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0b0f14] text-white">
-      <TerminalHero />
+    <main>
+      <HeroSection />
       <AboutSection />
-      
+      <ServicesSection />
+      <ProjectsSection />
+      <TestimonialsSection />
+      <ContactSection />
     </main>
   );
 }
