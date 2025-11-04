@@ -78,7 +78,7 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
                 <span aria-hidden="true" className="w-6" />
               </div>
               <div className="flex flex-1 flex-col gap-4 px-6 py-6">
-                <div className="rounded-2xl border border-white/5 bg-black/30 p-5 font-mono text-sm text-emerald-100">
+                <div className="rounded-2xl  p-5 font-mono text-sm text-emerald-100">
                   <p className="text-emerald-400">~/sobre/{activeTopic?.id ?? "intro"}</p>
                   <AnimatePresence mode="wait">
                     {activeTopic && (
