@@ -21,6 +21,7 @@ type TerminalTheme = {
 type TerminalProps = {
   sequence: Line[];
   loop?: boolean;
+  pauseMs?: number;
   className?: string;
   title?: string;
   theme?: TerminalTheme;
@@ -40,12 +41,17 @@ const defaultTheme: TerminalTheme = {
 export const Terminal = ({
   sequence,
   loop = true,
+  pauseMs,
   className,
   title = "terminal",
   theme,
   onEndCycle,
 }: TerminalProps) => {
-  const { lines, cursor } = useTypewriterSequence(sequence, { loop, onEndCycle });
+  const { lines, cursor } = useTypewriterSequence(sequence, {
+    loop,
+    pauseMs,
+    onEndCycle,
+  });
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const lastLengthRef = useRef(0);
