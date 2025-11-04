@@ -16,11 +16,46 @@ export const SEQ_DEFAULT: Line[] = [
     text: "event - compiled client and server successfully in 912 ms (172 modules)",
   },
   { type: "out", text: "event - compiled successfully in 286 ms" },
+  { type: "cmd", text: "npm run lint", speed: 20, delay: 450 },
+  {
+    type: "out",
+    text: "✔ No ESLint warnings or errors\n",
+  },
   { type: "cmd", text: "npm run build", speed: 22, delay: 600 },
   { type: "out", text: "info  - Linting and checking validity of types..." },
   { type: "out", text: "info  - Creating an optimized production build..." },
   { type: "out", text: "✓  Build optimized • ready to deploy\n" },
+  { type: "cmd", text: "npm run test", speed: 22, delay: 500 },
+  {
+    type: "out",
+    text: "Test Suites: 12 passed, 12 total",
+  },
+  {
+    type: "out",
+    text: "Tests:       48 passed, 48 total",
+  },
+  {
+    type: "out",
+    text: "Snapshots:   6 passed, 6 total",
+  },
+  {
+    type: "out",
+    text: "Time:        4.123 s\n",
+  },
   { type: "cmd", text: "npm run start", speed: 22, delay: 400 },
   { type: "out", text: "ready - started production server on http://localhost:3000" },
   { type: "out", text: "log   - GET / 200  36ms\n" },
+  { type: "cmd", text: "npx vercel deploy", speed: 24, delay: 550 },
+  {
+    type: "out",
+    text: "▲  Vercel CLI 32.2.1",
+  },
+  {
+    type: "out",
+    text: "✔  Production deployment complete",
+  },
+  {
+    type: "out",
+    text: "🌍  Live: https://devsouto.vercel.app\n",
+  },
 ];
