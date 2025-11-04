@@ -15,10 +15,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-200/50 bg-white/70 backdrop-blur-md dark:border-zinc-800/60 dark:bg-zinc-900/40">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
         <Link href="#home" className="flex items-center gap-3">
-          <Image src="/logo.svg" alt="Logo pessoal" width={40} height={40} priority />
-          <span className="text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-200">
-            Dev Portfólio
-          </span>
+          <Image src="/logo.png" alt="Logo pessoal" width={70} height={40} priority />
         </Link>
         <div className="flex items-center gap-6">
           <nav className="flex flex-wrap items-center justify-end gap-4 text-sm font-medium text-zinc-600 transition-colors dark:text-zinc-300">
