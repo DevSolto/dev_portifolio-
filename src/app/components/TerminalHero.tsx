@@ -6,25 +6,30 @@ import { Terminal } from "./Terminal";
 const TerminalHero = () => {
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-24 text-white lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
-      <div className="space-y-6">
-        <span className="inline-flex items-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-200/90">
-          DevSouto Portfolio
-        </span>
-        <h1 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-          Hero animado inspirado em terminais Next.js.
-        </h1>
-        <p className="max-w-xl text-base text-white/70 sm:text-lg">
-          Simule comandos reais com rolagem automática, cursor vivo e loops configuráveis. Ajuste a sequência sem tocar no componente: basta editar <code className="rounded bg-white/10 px-1 py-0.5 text-xs">terminalSequences.ts</code>.
+      <div className="space-y-4">
+        <p className="text-sm font-medium uppercase tracking-[0.4em] text-zinc-500 dark:text-zinc-400">
+          Desenvolvedor Frontend
         </p>
-        <div className="flex flex-col gap-3 text-sm text-white/60 sm:flex-row sm:items-center sm:gap-6">
-          <div className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-emerald-300" aria-hidden="true" />
-            Loop automático com pausa suave.
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-emerald-300" aria-hidden="true" />
-            Respeita prefers-reduced-motion.
-          </div>
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
+          Construindo experiências digitais modernas e eficientes.
+        </h1>
+        <p className="max-w-2xl text-lg text-zinc-600 dark:text-zinc-300">
+          Portfólio pessoal com uma seleção de projetos, serviços e depoimentos de clientes.
+          Explore para conhecer melhor meu trabalho e entre em contato.
+        </p>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a
+            className="rounded-full bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+            href="#projetos"
+          >
+            Ver projetos
+          </a>
+          <a
+            className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 transition hover:border-zinc-500 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
+            href="#contato"
+          >
+            Entrar em contato
+          </a>
         </div>
       </div>
       <div className="relative">

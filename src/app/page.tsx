@@ -6,11 +6,12 @@ import {
   ServicesSection,
   TestimonialsSection,
 } from "@/components/sections";
+import TerminalHero from "./components/TerminalHero";
 
 export default function Home() {
   return (
     <main>
-      <HeroSection />
+      <TerminalHero />
       <AboutSection />
       <ServicesSection />
       <ProjectsSection />
