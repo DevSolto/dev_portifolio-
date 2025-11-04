@@ -8,14 +8,14 @@ import {
   type LineType,
 } from "../lib/useTypewriterSequence";
 
-const PROMPT = "devsouto@next:~$ ";
-
 const mergeClasses = (...classes: Array<string | undefined>) =>
   classes.filter(Boolean).join(" ");
 
 type TerminalTheme = {
-  text: string;
-  glow: boolean;
+  textClassName?: string;
+  glow?: boolean;
+  cursorClassName?: string;
+  glowClassName?: string;
 };
 
 type TerminalProps = {
@@ -24,6 +24,7 @@ type TerminalProps = {
   pauseMs?: number;
   className?: string;
   title?: string;
+  prompt?: string;
   theme?: TerminalTheme;
   onEndCycle?: () => void;
 };
@@ -34,8 +35,10 @@ type CursorState = {
 };
 
 const defaultTheme: TerminalTheme = {
-  text: "text-emerald-300",
+  textClassName: "text-emerald-300",
+  cursorClassName: "bg-emerald-300/80",
   glow: true,
+  glowClassName: "drop-shadow-[0_0_12px_rgba(52,211,153,0.35)]",
 };
 
 export const Terminal = ({
@@ -44,6 +47,7 @@ export const Terminal = ({
   pauseMs,
   className,
   title = "terminal",
+  prompt = "devsouto@next:~$ ",
   theme,
   onEndCycle,
 }: TerminalProps) => {
@@ -56,7 +60,10 @@ export const Terminal = ({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const lastLengthRef = useRef(0);
 
-  const mergedTheme = useMemo(() => ({ ...defaultTheme, ...theme }), [theme]);
+  const mergedTheme = useMemo(
+    () => ({ ...defaultTheme, ...theme }),
+    [theme]
+  );
 
   useEffect(() => {
     if (lines.length > lastLengthRef.current) {
@@ -76,7 +83,10 @@ export const Terminal = ({
     return (
       <span
         aria-hidden="true"
-        className="ml-1 inline-block h-[1.2em] w-[0.55ch] bg-emerald-300/80 motion-safe:animate-pulse"
+        className={mergeClasses(
+          "ml-1 inline-block h-[1.2em] w-[0.55ch] motion-safe:animate-pulse",
+          mergedTheme.cursorClassName
+        )}
       />
     );
   };
@@ -113,13 +123,11 @@ export const Terminal = ({
                 <div key={`cmd-${index}`} className="flex">
                   <span
                     className={mergeClasses(
-                      mergedTheme.text,
-                      mergedTheme.glow
-                        ? "drop-shadow-[0_0_12px_rgba(52,211,153,0.35)]"
-                        : undefined
+                      mergedTheme.textClassName,
+                      mergedTheme.glow ? mergedTheme.glowClassName : undefined
                     )}
                   >
-                    {PROMPT}
+                    {prompt}
                   </span>
                   <span className="text-white/90">{line.text}</span>
                   {isLastLine && renderCursor(cursor)}
