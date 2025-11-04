@@ -56,7 +56,7 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
             Explorando histórias, tecnologias e experiências.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/70">
-            Clique em um tópico para conhecer mais sobre minha trajetória, stack principal e como aplico tudo isso em projetos reais.
+            Passe o mouse por um tópico para conhecer mais sobre minha trajetória, stack principal e como aplico tudo isso em projetos reais.
           </p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2">
@@ -111,7 +111,8 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
                   type="button"
                   role="button"
                   aria-pressed={isActive}
-                  onClick={() => setActiveId(topic.id)}
+                  onMouseEnter={() => setActiveId(topic.id)}
+                  onFocus={() => setActiveId(topic.id)}
                   className={`w-full rounded-2xl px-6 py-5 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isActive
                     ? "scale-[1.02] border border-emerald-400/40 bg-[#0b1119]/80 shadow-lg"
                     : "border border-white/5 bg-[#050b12]/60"
