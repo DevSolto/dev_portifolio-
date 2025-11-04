@@ -9,15 +9,8 @@ import AboutSection from "./components/AboutSection";
 
 export default function Home() {
   return (
-    <div className="bg-white text-zinc-900 dark:bg-black dark:text-zinc-100">
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <TestimonialsSection />
-        <ContactSection />
-      </main>
-    </div>
+    <main className="min-h-screen bg-[#0b0f14] text-white">
+      <TerminalHero />
+    </main>
   );
 }
