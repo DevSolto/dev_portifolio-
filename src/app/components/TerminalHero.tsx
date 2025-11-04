@@ -34,7 +34,6 @@ const TerminalHero = () => {
       </div>
       <div className="relative">
         <div className="pointer-events-none absolute -inset-6 hidden rounded-3xl bg-emerald-400/10 blur-3xl lg:block" aria-hidden="true" />
-<<<<<<< HEAD
         <Terminal
           sequence={SEQ_DEFAULT}
           loop
@@ -42,9 +41,6 @@ const TerminalHero = () => {
           className="relative z-10"
           title="Next.js logs"
         />
-=======
-        <Terminal sequence={SEQ_DEFAULT} loop className="relative z-10" title="terminal" />
->>>>>>> ea7a66d (merge)
       </div>
     </section>
   );
