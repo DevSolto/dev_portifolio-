@@ -83,7 +83,7 @@ const Hero = () => {
             className={`${inter.className} inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/70`}
           >
             <span className="h-2 w-2 rounded-full bg-[#8B5CF6] shadow-[0_0_18px_rgba(139,92,246,0.65)]" aria-hidden />
-            Jungle Gaming Ready
+            React Runtime Ready
           </span>
 
           <h1
@@ -146,7 +146,7 @@ const Hero = () => {
             >
               <p className="font-medium text-white/80">Stack focada em performance</p>
               <p className="mt-1 leading-relaxed text-white/60">
-                React 19, Next.js App Router, streaming RSC, Zustand e shadcn/ui conectados a métricas de tempo real para a Jungle Gaming.
+                React 19, Next.js App Router, streaming RSC, Zustand e shadcn/ui conectados a métricas de tempo real para produtos digitais de alta performance.
               </p>
             </div>
           </div>

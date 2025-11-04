@@ -1,6 +1,6 @@
 {
   "headline": "Engenheiro React + TypeScript para experiências em tempo real.",
-  "subheadline": "Orquestro interfaces com React Server Components, pipelines CI/CD e design systems que desbloqueiam squads de game tech como a Jungle Gaming.",
+  "subheadline": "Orquestro interfaces com React Server Components, pipelines CI/CD e design systems que desbloqueiam squads de game tech moderna.",
   "badge": {
     "label": "React + TypeScript + Vite"
   },
@@ -9,7 +9,7 @@
     { "label": "Entrar em contato", "variant": "outline", "targetId": "contato" }
   ],
   "terminal": {
-    "title": "jungle-gaming // boot.log",
+    "title": "react-runtime // boot.log",
     "prompt": "> ",
     "pauseMs": 26000,
     "theme": {
@@ -23,7 +23,7 @@
       { "type": "out", "text": "✔ Compiling React + TypeScript..." },
       { "type": "out", "text": "✔ Initializing Zustand store..." },
       { "type": "out", "text": "✔ Hydrating UI with shadcn components..." },
-      { "type": "out", "text": "info  - Streaming UI assets for Jungle Gaming..." },
+      { "type": "out", "text": "info  - Streaming UI assets via edge runtime..." },
       { "type": "out", "text": "🚀 Ready at https://devsouto.dev" }
     ]
   }
