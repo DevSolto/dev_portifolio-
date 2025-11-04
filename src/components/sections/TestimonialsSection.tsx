@@ -21,7 +21,7 @@ const testimonials: Testimonial[] = [
 
 export function TestimonialsSection() {
   return (
-    <section id="testimoniais" className="bg-zinc-50 py-24 dark:bg-zinc-900">
+    <section id="depoimentos" className="bg-zinc-50 py-24 dark:bg-zinc-900">
       <div className="mx-auto max-w-5xl space-y-12 px-6 sm:px-8">
         <div className="space-y-4 text-center md:text-left">
           <span className="text-sm font-semibold uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">
