@@ -44,7 +44,7 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
   return (
     <section
       id="sobre"
-      className="bg-zinc-950 px-6 py-20 text-white dark:bg-black"
+      className=" px-6 py-20 text-white"
       aria-labelledby="about-section-title"
     >
       <div className="mx-auto max-w-6xl">
@@ -71,11 +71,10 @@ export default function AboutSection({ topics = DEFAULT_TOPICS }: AboutSectionPr
                   role="button"
                   aria-pressed={isActive}
                   onClick={() => setActiveId(topic.id)}
-                  className={`w-full rounded-2xl border px-6 py-5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                    isActive
+                  className={`w-full rounded-2xl border px-6 py-5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isActive
                       ? "border-white/40 bg-white/10 shadow-lg backdrop-blur"
                       : "border-white/20 bg-white/5 hover:border-white/30 hover:bg-white/10"
-                  } ${shouldReduceMotion ? "" : "transform transition-transform hover:-translate-y-0.5"}`}
+                    } ${shouldReduceMotion ? "" : "transform transition-transform hover:-translate-y-0.5"}`}
                 >
                   <span className="text-lg font-semibold text-white">{topic.title}</span>
                   <p className="mt-2 text-sm text-white/70">{topic.description}</p>
